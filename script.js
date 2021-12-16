@@ -4,6 +4,7 @@ let displayElement = document.getElementById("display");
 let numberButtons = document.querySelectorAll(".number");
 let operatorButtons = document.querySelectorAll(".operator");
 let equalButton = document.getElementById("equal");
+let clearButton = document.getElementById("clear");
 let equation;
 let isFirstNumber = true;
 let clearNumber = false
@@ -51,7 +52,7 @@ function operate(str, a, b) {
 
 function showResultInDisplay(res) {
 	firstNumber = res;
-
+	displayValue = res;
 	displayElement.value =  res;
 }
 // clicking number buttons updates display
@@ -100,4 +101,12 @@ operatorButtons.forEach(button => {
 // solve equation
 equalButton.onclick = () => {
 	showResultInDisplay(operate(operator, firstNumber,Number(displayValue)));
+}
+
+// reset using clear button
+clearButton.onclick = () => {
+	displayValue = ""
+	isFirstNumber = true;
+	clearNumber = false;
+	displayElement.value = displayValue;
 }
