@@ -55,19 +55,27 @@ function showResultInDisplay(res) {
 	displayElement.value =  res;
 }
 // clicking number buttons updates display
-function updateDisplayValue(number) {
+function updateDisplayValue(number, id) {
 	// clear numb
 	if (clearNumber){
 		displayValue = "";
 		clearNumber = false;
 	}
+	// if backspace , remove one character
+	if (id === "delete") {
+		displayValue = displayValue.split("").slice(0,-1).join("");
 
-	displayValue = `${displayValue}${number}`;
-	displayElement.value = displayValue
+		displayElement.value = displayValue;
+	} else {
+	// add character to existing set of numbers
+		displayValue = `${displayValue}${number}`;
+		displayElement.value = displayValue
+	}
 }
 numberButtons.forEach(button => {
 	button.onclick = (el) => {
-		updateDisplayValue(el.target.innerHTML)
+		let id =  el.target.id;
+		updateDisplayValue(el.target.innerHTML, id)
 	}
 });
 
