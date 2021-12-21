@@ -69,6 +69,8 @@ function updateDisplayValue(number, id) {
 
 		displayElement.value = displayValue;
 	} else {
+		// do not allow multiple decimals
+		if ((number == ".") && displayValue.includes('.')) return;
 	// add character to existing set of numbers
 		displayValue = `${displayValue}${number}`;
 		displayElement.value = displayValue
