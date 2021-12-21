@@ -16,6 +16,7 @@ let operatorLookup = {
 }
 let operator;
 let firstNumber;
+let firstOperation;
 
 function add(a,b) {
 	return a + b;
@@ -85,13 +86,13 @@ operatorButtons.forEach(button => {
 	button.onclick = (el) => {
 		// set the operator
 		operator =  operatorLookup[el.target.id];
-		
-
 		if (isFirstNumber) {
 			firstNumber = Number(displayValue);
+			firstOperation = operator;
 			isFirstNumber =  false;
 		} else {
-			showResultInDisplay(operate(operator, firstNumber,Number(displayValue)));
+			showResultInDisplay(operate(firstOperation, firstNumber, Number(displayValue)));
+			isFirstNumber = true;
 		}
 		// clear display
 		clearNumber = true;
@@ -101,6 +102,8 @@ operatorButtons.forEach(button => {
 // solve equation
 equalButton.onclick = () => {
 	showResultInDisplay(operate(operator, firstNumber,Number(displayValue)));
+	isFirstNumber = true;
+	clearNumber = true;
 }
 
 // reset using clear button
